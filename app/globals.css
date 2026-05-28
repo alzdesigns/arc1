@@ -159,6 +159,9 @@ img {
 
 .cta-btn,
 .cta-btn-outline {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   border-radius: 9999px;
   font-size: 11px;
   text-transform: uppercase;
@@ -166,29 +169,91 @@ img {
     color 180ms ease,
     border-color 180ms ease,
     background 180ms ease,
+    background-position 220ms ease,
+    box-shadow 180ms ease,
     transform 180ms ease;
 }
 
+.cta-btn::before,
+.cta-btn-outline::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 18%;
+  right: 18%;
+  z-index: 0;
+  height: 48%;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  opacity: 0.45;
+  transform: skewX(-18deg);
+  transition:
+    left 180ms ease,
+    right 180ms ease,
+    opacity 180ms ease;
+}
+
 .cta-btn {
-  color: var(--background);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  color: #080808;
   font-weight: 600;
-  background: #b3b3b3;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background:
+    linear-gradient(145deg, #ffffff 0%, #aeb3ba 18%, #f8f9fa 34%, #777d86 51%, #dfe3e8 67%, #ffffff 82%, #8b919a 100%);
+  background-size: 180% 180%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.38),
+    0 12px 28px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(255, 255, 255, 0.08);
 }
 
 .cta-btn:hover {
   transform: translateY(-1px);
-  background: #ffffff;
+  background-position: 100% 50%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.34),
+    0 16px 34px rgba(0, 0, 0, 0.4),
+    0 0 28px rgba(255, 255, 255, 0.14);
+}
+
+.cta-btn:hover::before,
+.cta-btn-outline:hover::before {
+  left: 8%;
+  right: 8%;
+  opacity: 0.7;
+}
+
+.cta-btn:focus-visible,
+.cta-btn-outline:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 3px;
 }
 
 .cta-btn-outline {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--muted-60);
+  border: 1px solid rgba(219, 225, 232, 0.42);
+  color: rgba(255, 255, 255, 0.76);
   font-weight: 500;
+  background:
+    linear-gradient(#101010, #101010) padding-box,
+    linear-gradient(145deg, rgba(255, 255, 255, 0.75), rgba(133, 139, 148, 0.45), rgba(255, 255, 255, 0.62)) border-box;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 24px rgba(0, 0, 0, 0.24);
 }
 
 .cta-btn-outline:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(238, 242, 246, 0.7);
   color: var(--foreground);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(118, 124, 133, 0.08), rgba(255, 255, 255, 0.12)) padding-box,
+    linear-gradient(145deg, #ffffff, #858b94, #f3f5f7) border-box;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 14px 30px rgba(0, 0, 0, 0.3),
+    0 0 22px rgba(255, 255, 255, 0.08);
 }
 
 .nav-cta {
