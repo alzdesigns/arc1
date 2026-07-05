@@ -286,7 +286,7 @@ export default function Home() {
           <div className="reveal hero-logo">
             <ArcLogo width={120} height={60} />
           </div>
-          <p className="reveal reveal-delay-1 eyebrow">Accelerated Recovery Club</p>
+          <p className="reveal reveal-delay-1 eyebrow">Accelerated Results Club</p>
           <h1 className="reveal reveal-delay-2 hero-title">
             <span className="mobile-title-line">Recover Faster.</span> <span className="serif-italic mobile-title-line">Feel Better.</span>
             <br />
@@ -425,7 +425,7 @@ export default function Home() {
               <div className="footer-logo">
                 <ArcLogo width={56} height={28} />
               </div>
-              <p>Accelerated Recovery Club</p>
+              <p>Accelerated Results Club</p>
               <span>Melbourne, Australia</span>
             </div>
 

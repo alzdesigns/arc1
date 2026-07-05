@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "ARC Accelerated Recovery Club";
+export const alt = "ARC Accelerated Results Club";
 export const size = {
   width: 1200,
   height: 630
@@ -77,7 +77,7 @@ export default function Image() {
                 textTransform: "uppercase"
               }}
             >
-              Accelerated Recovery Club
+              Accelerated Results Club
             </div>
             <div style={{ display: "flex", flexDirection: "column", fontSize: 64, lineHeight: 1.04, fontWeight: 400, letterSpacing: -2 }}>
               <span>Recover Faster.</span>

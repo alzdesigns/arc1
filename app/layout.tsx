@@ -20,7 +20,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    default: "ARC | Accelerated Recovery Club",
+    default: "ARC | Accelerated Results Club",
     template: "%s | ARC"
   },
   description:
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     canonical: "/"
   },
   openGraph: {
-    title: "ARC | Accelerated Recovery Club",
+    title: "ARC | Accelerated Results Club",
     description:
       "Melbourne's dedicated red light therapy and wellness club. Non-invasive treatments designed to help your body heal, recover, and perform at its best.",
     url: "/",
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "ARC Accelerated Recovery Club"
+        alt: "ARC Accelerated Results Club"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "ARC | Accelerated Recovery Club",
+    title: "ARC | Accelerated Results Club",
     description:
       "Melbourne's dedicated red light therapy and wellness club. Non-invasive treatments designed to help your body heal, recover, and perform at its best.",
     images: ["/opengraph-image"]
