@@ -2,8 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
+
+declare global {
+  interface Window {
+    iFrameResize?: (options: Record<string, unknown>, selector: string) => void;
+  }
+}
 
 function ArcLogo({
   width = 64,
@@ -241,10 +247,123 @@ function BookingModal({ open, onClose }: { open: boolean; onClose: () => void })
   );
 }
 
+const GLOFOX_LEAD_URL = `https://app.glofox.com/portal/#/branch/${GLOFOX_BRANCH_ID}/lead-register`;
+
+function LeadCaptureModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+
+    if (!document.getElementById("glofox-leadcap-styles")) {
+      const link = document.createElement("link");
+      link.id = "glofox-leadcap-styles";
+      link.rel = "stylesheet";
+      link.href = "https://lead-capture-stylesheet.s3-eu-west-1.amazonaws.com/leadcapstyles.css";
+      document.head.appendChild(link);
+    }
+
+    const initResize = () => {
+      window.iFrameResize?.(
+        {
+          log: false,
+          checkOrigin: false,
+          tolerance: 0,
+          sizeHeight: true,
+          heightCalculationMethod: "lowestElement",
+          minHeight: 300,
+          maxHeight: 1800,
+          sizeWidth: true,
+          widthCalculationMethod: "bodyOffset",
+          maxWidth: 980,
+          scrolling: "auto"
+        },
+        `#glofox_${GLOFOX_BRANCH_ID}`
+      );
+    };
+
+    let script = document.getElementById("iframe-resizer-script") as HTMLScriptElement | null;
+    if (window.iFrameResize) {
+      initResize();
+    } else if (script) {
+      script.addEventListener("load", initResize, { once: true });
+    } else {
+      script = document.createElement("script");
+      script.id = "iframe-resizer-script";
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.6.1/iframeResizer.min.js";
+      script.addEventListener("load", initResize, { once: true });
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="booking-modal-overlay" onClick={onClose}>
+      <div className="lead-modal" role="dialog" aria-modal="true" aria-label="Sign up with ARC" onClick={event => event.stopPropagation()}>
+        <button type="button" className="lead-modal-close" onClick={onClose} aria-label="Close sign up">
+          <CloseIcon />
+        </button>
+        <p className="lead-modal-heading">Sign Up</p>
+        <div id="hero-form">
+          <div className="glofox_iframe" id="iframecontainer">
+            <iframe
+              className="glofox_iframe"
+              id={`glofox_${GLOFOX_BRANCH_ID}`}
+              src={GLOFOX_LEAD_URL}
+              width="0"
+              height="0"
+              scrolling="yes"
+              frameBorder="0"
+              title="Sign up for ARC"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [leadOpen, setLeadOpen] = useState(false);
+  const bookingOpenRef = useRef(bookingOpen);
+  const leadInteractedRef = useRef(false);
+
+  useEffect(() => {
+    bookingOpenRef.current = bookingOpen;
+  }, [bookingOpen]);
+
+  const openLeadCapture = () => {
+    leadInteractedRef.current = true;
+    setLeadOpen(true);
+  };
+
+  const closeLeadCapture = () => {
+    leadInteractedRef.current = true;
+    setLeadOpen(false);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!leadInteractedRef.current && !bookingOpenRef.current) {
+        setLeadOpen(true);
+      }
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -290,6 +409,9 @@ export default function Home() {
                 {item}
               </button>
             ))}
+            <button type="button" onClick={openLeadCapture} className="cta-btn-outline nav-cta">
+              Sign Up
+            </button>
             <button type="button" onClick={() => setBookingOpen(true)} className="cta-btn nav-cta">
               Book Now
             </button>
@@ -317,7 +439,7 @@ export default function Home() {
 
         {menuOpen ? (
           <div className="mobile-menu">
-            {[...navItems, "Book Now"].map(item => (
+            {[...navItems, "Sign Up", "Book Now"].map(item => (
               <button
                 key={item}
                 type="button"
@@ -325,6 +447,8 @@ export default function Home() {
                   setMenuOpen(false);
                   if (item === "Book Now") {
                     setBookingOpen(true);
+                  } else if (item === "Sign Up") {
+                    openLeadCapture();
                   } else {
                     scrollToSection(sectionId(item));
                   }
@@ -506,6 +630,7 @@ export default function Home() {
       </footer>
 
       <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <LeadCaptureModal open={leadOpen} onClose={closeLeadCapture} />
     </div>
   );
 }

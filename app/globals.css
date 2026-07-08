@@ -1093,3 +1093,64 @@ img {
     opacity: 1;
   }
 }
+
+.lead-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: #101010;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.lead-modal-heading {
+  margin: 0 0 1rem;
+  padding-right: 2rem;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted-60);
+}
+
+.lead-modal-close {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  color: var(--muted-60);
+  background: rgba(255, 255, 255, 0.06);
+  transition:
+    color 150ms ease,
+    background 150ms ease;
+}
+
+.lead-modal-close:hover {
+  color: var(--foreground);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.lead-modal #iframecontainer {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.lead-modal .glofox_iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+}
