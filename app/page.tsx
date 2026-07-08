@@ -126,6 +126,14 @@ function InstagramIcon() {
   );
 }
 
+function CloseIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+      <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function FacebookIcon() {
   return (
     <svg
@@ -191,9 +199,52 @@ function sectionId(label: string) {
   return label.toLowerCase().replace(/\s/g, "-");
 }
 
+const GLOFOX_BRANCH_ID = "6a0c3039fcbf4cb10709982d";
+const GLOFOX_BOOKING_URL = `https://app.glofox.com/portal/#/branch/${GLOFOX_BRANCH_ID}/classes-week-view?header=classes`;
+
+function BookingModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="booking-modal-overlay" onClick={onClose}>
+      <div className="booking-modal" role="dialog" aria-modal="true" aria-label="Book your session" onClick={event => event.stopPropagation()}>
+        <div className="booking-modal-header">
+          <p>Book Your Session</p>
+          <button type="button" className="booking-modal-close" onClick={onClose} aria-label="Close booking">
+            <CloseIcon />
+          </button>
+        </div>
+        <iframe className="booking-modal-iframe" src={GLOFOX_BOOKING_URL} title="Book a session with ARC" />
+        <div className="booking-modal-footer">
+          <a href={GLOFOX_BOOKING_URL} target="_blank" rel="noopener noreferrer" className="booking-modal-fallback">
+            Having trouble? Open booking in a new tab
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -239,7 +290,7 @@ export default function Home() {
                 {item}
               </button>
             ))}
-            <button type="button" onClick={() => scrollToSection("booking")} className="cta-btn nav-cta">
+            <button type="button" onClick={() => setBookingOpen(true)} className="cta-btn nav-cta">
               Book Now
             </button>
           </div>
@@ -270,7 +321,14 @@ export default function Home() {
               <button
                 key={item}
                 type="button"
-                onClick={() => scrollToSection(item === "Book Now" ? "booking" : sectionId(item))}
+                onClick={() => {
+                  setMenuOpen(false);
+                  if (item === "Book Now") {
+                    setBookingOpen(true);
+                  } else {
+                    scrollToSection(sectionId(item));
+                  }
+                }}
                 className="mobile-menu-link"
               >
                 {item}
@@ -297,7 +355,7 @@ export default function Home() {
             perform at its best.
           </p>
           <div className="reveal reveal-delay-4 hero-actions">
-            <button type="button" onClick={() => scrollToSection("booking")} className="cta-btn hero-action">
+            <button type="button" onClick={() => setBookingOpen(true)} className="cta-btn hero-action">
               Book Your Session
             </button>
             <button type="button" onClick={() => scrollToSection("about")} className="cta-btn-outline hero-action">
@@ -409,9 +467,9 @@ export default function Home() {
             Your first step toward better recovery, healthier skin, and improved wellbeing starts here.
           </p>
           <div className="reveal reveal-delay-3">
-            <a href="#" className="cta-btn booking-button">
+            <button type="button" onClick={() => setBookingOpen(true)} className="cta-btn booking-button">
               Book Your Session
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -446,6 +504,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </div>
   );
 }
