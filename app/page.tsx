@@ -112,6 +112,14 @@ function SunIcon() {
   );
 }
 
+function PulseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="benefit-icon">
+      <path d="M3 12h4l2-7 4 14 2-7h6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function InstagramIcon() {
   return (
     <svg
@@ -160,27 +168,86 @@ function FacebookIcon() {
 
 const navItems = ["About", "Benefits", "How It Works"];
 
-const benefits: Array<{ title: string; description: string; icon: ReactNode }> = [
+type Machine = {
+  name: string;
+  tagline: string;
+  icon: ReactNode;
+  featuresLabel?: string;
+  features?: string[];
+  stat?: { value: string; label: string };
+  benefits: string[];
+};
+
+const machines: Machine[] = [
   {
-    title: "Faster Recovery",
-    description: "Reduce muscle soreness and speed up recovery after workouts or injuries. Get back to doing what you love, sooner.",
-    icon: <BoltIcon />
+    name: "BodyShape V2 Vacuum Treadmill",
+    tagline: "Burn More. Faster.",
+    icon: <BoltIcon />,
+    featuresLabel: "Key Features",
+    features: ["Vacuum technology", "Infrared heat", "Incline walking", "Negative pressure", "Low-impact cardio"],
+    stat: { value: "65%", label: "Up to 65% more calories burned than a standard treadmill" },
+    benefits: [
+      "Targets stubborn lower-body areas",
+      "Supports circulation",
+      "Encourages lymphatic flow",
+      "May assist in reducing cellulite",
+      "Helps contour the lower body",
+      "Low-impact exercise"
+    ]
   },
   {
-    title: "Pain & Inflammation Relief",
-    description: "A non-invasive approach to managing joint pain, stiffness, and chronic inflammation without medication.",
-    icon: <ReliefIcon />
+    name: "Infrared StairMaster",
+    tagline: "Climb Smarter.",
+    icon: <PulseIcon />,
+    benefits: [
+      "High calorie-burning workout",
+      "Targets glutes, hamstrings, quads & calves",
+      "Strengthens lower body",
+      "Continuously engages the core",
+      "Helps improve cardiovascular fitness",
+      "Builds muscular endurance",
+      "Improved circulation",
+      "Muscle recovery",
+      "Reduced stiffness"
+    ]
   },
   {
-    title: "Skin Health & Rejuvenation",
-    description: "Boost collagen production, improve skin tone, and reduce the appearance of fine lines, scars, and blemishes.",
-    icon: <SkinIcon />
+    name: "Infrared Mat Pilates",
+    tagline: "Strength. Stretch. Recover.",
+    icon: <ReliefIcon />,
+    featuresLabel: "Studio Experience",
+    features: ["Limited to 5 mats per class", "One expert instructor", "Personalised coaching", "Boutique studio feel"],
+    benefits: ["Warmer muscles", "Increased flexibility", "Better circulation", "Improved recovery"]
   },
   {
-    title: "Energy & Wellbeing",
-    description: "Support your body at a cellular level. Many clients report improved energy, better sleep, and an overall sense of wellbeing.",
-    icon: <SunIcon />
+    name: "RollShape Body Roller",
+    tagline: "Recover. Recharge. Restore.",
+    icon: <SkinIcon />,
+    featuresLabel: "Technologies",
+    features: ["Infrared heat", "Mechanical body rolling massage", "Collagen-supporting light therapy", "Chromotherapy"],
+    benefits: [
+      "Supports circulation",
+      "Encourages lymphatic drainage",
+      "Muscle relaxation",
+      "Recovery support",
+      "May assist skin tightening",
+      "Body contouring",
+      "Relaxation"
+    ]
   }
+];
+
+const infraredBenefits = [
+  "Increased circulation",
+  "Improved muscle recovery",
+  "Reduced stiffness",
+  "Greater flexibility",
+  "Increased mobility",
+  "Muscle relaxation",
+  "Improved oxygen delivery",
+  "Supports collagen production",
+  "May assist skin health",
+  "Enhanced recovery between workouts"
 ];
 
 const steps = [
@@ -532,20 +599,65 @@ export default function Home() {
       <section id="benefits" className="content-section">
         <div className="section-wrap">
           <div className="section-heading">
-            <p className="reveal section-eyebrow">Why Red Light Therapy</p>
+            <p className="reveal section-eyebrow">Our Equipment</p>
             <h2 className="reveal reveal-delay-1 section-title centered">
-              What It Can Do <span className="serif-italic">For You</span>
+              Engineered <span className="serif-italic">For Results</span>
             </h2>
           </div>
 
-          <div className="benefits-grid">
-            {benefits.map((benefit, index) => (
-              <div key={benefit.title} className={`reveal reveal-delay-${index + 1} benefit-card`}>
-                <div className="benefit-icon-wrap">{benefit.icon}</div>
-                <h3>{benefit.title}</h3>
-                <p>{benefit.description}</p>
+          <div className="machines-grid">
+            {machines.map((machine, index) => (
+              <div key={machine.name} className={`reveal reveal-delay-${index + 1} machine-card`}>
+                <div className="benefit-icon-wrap">{machine.icon}</div>
+                <h3 className="machine-name">{machine.name}</h3>
+                <p className="machine-tagline serif-italic">{machine.tagline}</p>
+
+                {machine.features ? (
+                  <div className="machine-features-block">
+                    <p className="machine-list-label">{machine.featuresLabel}</p>
+                    <div className="machine-features">
+                      {machine.features.map(feature => (
+                        <span key={feature} className="machine-feature-tag">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                {machine.stat ? (
+                  <div className="machine-stat">
+                    <span className="machine-stat-value">{machine.stat.value}</span>
+                    <p className="machine-stat-label">{machine.stat.label}</p>
+                  </div>
+                ) : null}
+
+                <div className="machine-benefits-block">
+                  <p className="machine-list-label">Benefits</p>
+                  <ul className="machine-benefits">
+                    {machine.benefits.map(benefit => (
+                      <li key={benefit}>{benefit}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
+          </div>
+
+          <div className="reveal infrared-panel">
+            <div className="benefit-icon-wrap infrared-icon-wrap">
+              <SunIcon />
+            </div>
+            <p className="section-eyebrow">The Power of</p>
+            <h3 className="infrared-title serif-italic">Infrared</h3>
+            <div className="infrared-grid">
+              {infraredBenefits.map(benefit => (
+                <div key={benefit} className="infrared-item">
+                  <span className="infrared-dot" />
+                  {benefit}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -623,7 +735,8 @@ export default function Home() {
 
           <div className="copyright">
             <p>
-              &copy; 2026 ARC. All rights reserved. <Link href="/privacy-policy">Privacy Policy</Link>
+              &copy; 2026 ARC. All rights reserved. <Link href="/privacy-policy">Privacy Policy</Link> ·{" "}
+              <Link href="/terms">Terms &amp; Conditions</Link>
             </p>
           </div>
         </div>

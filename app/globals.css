@@ -483,18 +483,6 @@ img {
   text-align: center;
 }
 
-.benefits-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.benefit-card {
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.02);
-}
-
 .benefit-icon-wrap {
   margin-bottom: 1.5rem;
   color: var(--muted-30);
@@ -505,7 +493,6 @@ img {
   height: 2rem;
 }
 
-.benefit-card h3,
 .step-card h3 {
   margin: 0 0 0.75rem;
   font-size: 1.125rem;
@@ -514,13 +501,171 @@ img {
   letter-spacing: 0;
 }
 
-.benefit-card p,
 .step-card p {
   margin: 0;
   color: var(--muted-40);
   font-size: 0.875rem;
   font-weight: 300;
   line-height: 1.625;
+}
+
+.machines-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.machine-card {
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.machine-name {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.machine-tagline {
+  margin: 0 0 1.75rem;
+  color: var(--muted-80);
+  font-size: 1.0625rem;
+}
+
+.machine-list-label {
+  margin: 0 0 0.75rem;
+  color: var(--muted-30);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.machine-features-block {
+  margin-bottom: 1.75rem;
+}
+
+.machine-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.machine-feature-tag {
+  padding: 0.4rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  color: var(--muted-50);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.machine-stat {
+  margin-bottom: 1.75rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.machine-stat-value {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.machine-stat-label {
+  margin: 0;
+  color: var(--muted-40);
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.machine-benefits {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.machine-benefits li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--muted-40);
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.machine-benefits li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--muted-30);
+}
+
+.infrared-panel {
+  margin-top: 1.5rem;
+  padding: 3rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  background: radial-gradient(ellipse at 50% 0%, rgba(179, 179, 179, 0.06) 0%, transparent 70%);
+  text-align: center;
+}
+
+.infrared-icon-wrap {
+  margin: 0 auto 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.infrared-title {
+  margin: 0.25rem 0 2.5rem;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.infrared-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.infrared-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted-50);
+  font-size: 0.8rem;
+  font-weight: 300;
+  text-align: left;
+}
+
+.infrared-dot {
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: var(--muted-40);
 }
 
 .steps-grid {
@@ -870,8 +1015,8 @@ img {
     flex-direction: row;
   }
 
-  .benefits-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .infrared-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -967,9 +1112,21 @@ img {
     font-size: 3rem;
   }
 
-  .benefit-card,
-  .step-card {
+  .step-card,
+  .machine-card {
     padding: 2.5rem;
+  }
+
+  .machines-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .infrared-panel {
+    padding: 4rem 3rem;
+  }
+
+  .infrared-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .steps-grid {
