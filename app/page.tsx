@@ -273,7 +273,7 @@ function sectionId(label: string) {
 }
 
 const GLOFOX_BRANCH_ID = "6a0c3039fcbf4cb10709982d";
-const GLOFOX_BOOKING_URL = `https://app.glofox.com/portal/#/branch/${GLOFOX_BRANCH_ID}/classes-week-view?header=classes`;
+const GLOFOX_BOOKING_URL = `https://app.glofox.com/portal/#/branch/${GLOFOX_BRANCH_ID}/classes-week-view`;
 
 function BookingModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {
