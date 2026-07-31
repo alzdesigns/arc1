@@ -589,7 +589,7 @@ export default function Home() {
           <div>
             <p className="reveal section-eyebrow">About ARC</p>
             <h2 className="reveal reveal-delay-1 section-title">
-              Accelerated Recovery, <span className="serif-italic">Real Results</span>
+              Accelerated Results, <span className="serif-italic">Real Results</span>
             </h2>
             <p className="reveal reveal-delay-2 section-copy">
               ARC is a fitness and wellness clinic built around the science of red light therapy. Using targeted wavelengths of red and near-infrared
