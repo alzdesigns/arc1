@@ -166,12 +166,23 @@ function FacebookIcon() {
   );
 }
 
-const navItems = ["About", "Benefits", "How It Works"];
+const navItems = ["About", "Benefits", "Gallery", "How It Works"];
+
+const galleryImages = [
+  { src: "/images/ARC_26A_Launch_July_Stills-45.JPG", alt: "Group red light Pilates class at ARC", wide: true },
+  { src: "/images/ARC_26A_Launch_July_Stills-14.JPG", alt: "ARC Accelerated Results Club branded hoodie" },
+  { src: "/images/ARC_26A_Launch_July_Stills-9.JPG", alt: "Member training on the Infrared StairMaster" },
+  { src: "/images/ARC_26A_Launch_July_Stills-58.JPG", alt: "Close up of the red light therapy floor mat" },
+  { src: "/images/ARC_26A_Launch_July_Stills-27.JPG", alt: "Detail of infrared heat panel during a session" },
+  { src: "/images/ARC_26A_Launch_July_Stills-30.JPG", alt: "Member training on the vacuum treadmill" },
+  { src: "/images/ARC_26A_Launch_July_Stills-42.JPG", alt: "Red light Pilates class plank pose" }
+];
 
 type Machine = {
   name: string;
   tagline: string;
   icon: ReactNode;
+  image: string;
   featuresLabel?: string;
   features?: string[];
   stat?: { value: string; label: string };
@@ -183,6 +194,7 @@ const machines: Machine[] = [
     name: "BodyShape V2 Vacuum Treadmill",
     tagline: "Burn More. Faster.",
     icon: <BoltIcon />,
+    image: "/images/ARC_26A_Launch_July_Stills-11.JPG",
     featuresLabel: "Key Features",
     features: ["Vacuum technology", "Infrared heat", "Incline walking", "Negative pressure", "Low-impact cardio"],
     stat: { value: "65%", label: "Up to 65% more calories burned than a standard treadmill" },
@@ -199,6 +211,7 @@ const machines: Machine[] = [
     name: "Infrared StairMaster",
     tagline: "Climb Smarter.",
     icon: <PulseIcon />,
+    image: "/images/ARC_26A_Launch_July_Stills-25.JPG",
     benefits: [
       "High calorie-burning workout",
       "Targets glutes, hamstrings, quads & calves",
@@ -215,6 +228,7 @@ const machines: Machine[] = [
     name: "Infrared Mat Pilates",
     tagline: "Strength. Stretch. Recover.",
     icon: <ReliefIcon />,
+    image: "/images/ARC_26A_Launch_July_Stills-43.JPG",
     featuresLabel: "Studio Experience",
     features: ["Limited to 5 mats per class", "One expert instructor", "Personalised coaching", "Boutique studio feel"],
     benefits: ["Warmer muscles", "Increased flexibility", "Better circulation", "Improved recovery"]
@@ -223,6 +237,7 @@ const machines: Machine[] = [
     name: "RollShape Body Roller",
     tagline: "Recover. Recharge. Restore.",
     icon: <SkinIcon />,
+    image: "/images/ARC_26A_Launch_July_Stills-18.JPG",
     featuresLabel: "Technologies",
     features: ["Infrared heat", "Mechanical body rolling massage", "Collagen-supporting light therapy", "Chromotherapy"],
     benefits: [
@@ -530,7 +545,15 @@ export default function Home() {
       </nav>
 
       <section className="hero hero-gradient">
-        <div className="hero-photo" />
+        <div className="hero-photo">
+          <Image
+            src="/images/ARC_26A_Launch_July_Stills-32.JPG"
+            alt="ARC red light therapy studio session"
+            fill
+            priority
+            sizes="100vw"
+          />
+        </div>
         <div className="hero-content">
           <div className="reveal hero-logo">
             <ArcLogo width={120} height={60} />
@@ -608,37 +631,42 @@ export default function Home() {
           <div className="machines-grid">
             {machines.map((machine, index) => (
               <div key={machine.name} className={`reveal reveal-delay-${index + 1} machine-card`}>
-                <div className="benefit-icon-wrap">{machine.icon}</div>
-                <h3 className="machine-name">{machine.name}</h3>
-                <p className="machine-tagline serif-italic">{machine.tagline}</p>
+                <div className="machine-photo">
+                  <Image src={machine.image} alt={machine.name} fill sizes="(min-width: 768px) 50vw, 100vw" />
+                </div>
+                <div className="machine-card-body">
+                  <div className="benefit-icon-wrap">{machine.icon}</div>
+                  <h3 className="machine-name">{machine.name}</h3>
+                  <p className="machine-tagline serif-italic">{machine.tagline}</p>
 
-                {machine.features ? (
-                  <div className="machine-features-block">
-                    <p className="machine-list-label">{machine.featuresLabel}</p>
-                    <div className="machine-features">
-                      {machine.features.map(feature => (
-                        <span key={feature} className="machine-feature-tag">
-                          {feature}
-                        </span>
-                      ))}
+                  {machine.features ? (
+                    <div className="machine-features-block">
+                      <p className="machine-list-label">{machine.featuresLabel}</p>
+                      <div className="machine-features">
+                        {machine.features.map(feature => (
+                          <span key={feature} className="machine-feature-tag">
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ) : null}
+                  ) : null}
 
-                {machine.stat ? (
-                  <div className="machine-stat">
-                    <span className="machine-stat-value">{machine.stat.value}</span>
-                    <p className="machine-stat-label">{machine.stat.label}</p>
-                  </div>
-                ) : null}
+                  {machine.stat ? (
+                    <div className="machine-stat">
+                      <span className="machine-stat-value">{machine.stat.value}</span>
+                      <p className="machine-stat-label">{machine.stat.label}</p>
+                    </div>
+                  ) : null}
 
-                <div className="machine-benefits-block">
-                  <p className="machine-list-label">Benefits</p>
-                  <ul className="machine-benefits">
-                    {machine.benefits.map(benefit => (
-                      <li key={benefit}>{benefit}</li>
-                    ))}
-                  </ul>
+                  <div className="machine-benefits-block">
+                    <p className="machine-list-label">Benefits</p>
+                    <ul className="machine-benefits">
+                      {machine.benefits.map(benefit => (
+                        <li key={benefit}>{benefit}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             ))}
@@ -658,6 +686,35 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="glow-line" />
+
+      <section id="gallery" className="content-section">
+        <div className="section-wrap">
+          <div className="section-heading">
+            <p className="reveal section-eyebrow">Gallery</p>
+            <h2 className="reveal reveal-delay-1 section-title centered">
+              Inside <span className="serif-italic">The Studio</span>
+            </h2>
+          </div>
+
+          <div className="gallery-grid">
+            {galleryImages.map((image, index) => (
+              <div
+                key={image.src}
+                className={`reveal reveal-delay-${Math.min(index + 1, 4)} gallery-item${image.wide ? " gallery-item--wide" : ""}`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes={image.wide ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 33vw, 50vw"}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
