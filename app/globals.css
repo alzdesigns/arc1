@@ -1312,3 +1312,166 @@ img {
   }
 }
 
+
+/* Pricing */
+:root {
+  --arc-red: #e5322d;
+}
+
+.pricing-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.pricing-card {
+  padding: 2rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pricing-card--featured {
+  border-color: var(--arc-red);
+  box-shadow: 0 0 40px rgba(229, 50, 45, 0.12);
+}
+
+.pricing-name {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.pricing-desc {
+  margin: 0 0 1.25rem;
+  color: var(--muted-60);
+  line-height: 1.6;
+}
+
+.pricing-note {
+  margin: 0;
+  color: var(--arc-red);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.pricing-list,
+.pricing-features {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pricing-list li span:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-list em {
+  color: var(--muted-50);
+  font-size: 0.85rem;
+  font-style: normal;
+}
+
+.pricing-price {
+  margin: 0;
+  color: var(--arc-red);
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.pricing-price--big {
+  margin-bottom: 1.25rem;
+  font-size: 3rem;
+}
+
+.pricing-price small {
+  color: var(--muted-50);
+  font-size: 1rem;
+}
+
+.pricing-features li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  color: var(--muted-80);
+}
+
+.pricing-features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--arc-red);
+}
+
+/* Placeholders */
+.placeholder-box {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px dashed rgba(229, 50, 45, 0.5);
+  border-radius: 1rem;
+  background: rgba(229, 50, 45, 0.04);
+  text-align: center;
+}
+
+.placeholder-box--inline {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  text-align: left;
+}
+
+.placeholder-box h3 {
+  margin: 0.75rem 0 0.25rem;
+  font-weight: 400;
+}
+
+.placeholder-box p {
+  margin: 0.5rem 0 0;
+  color: var(--muted-50);
+  font-size: 0.9rem;
+}
+
+.placeholder-tag {
+  color: var(--arc-red);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.placeholder-row {
+  display: grid;
+  gap: 1rem;
+}
+
+.placeholder-row .placeholder-box {
+  margin: 0;
+}
+
+.footer-placeholder {
+  display: block;
+  color: var(--muted-30);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+@media (width >= 768px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .placeholder-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

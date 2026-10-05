@@ -160,7 +160,13 @@ function FacebookIcon() {
   );
 }
 
-const navItems = ["About", "Benefits", "Gallery", "How It Works"];
+const navItems = ["About", "Benefits", "Gallery", "How It Works", "Pricing"];
+
+const pricingPacks = [
+  { name: "Intro Offer", sessions: "3 sessions", price: "$99" },
+  { name: "ARCx6", sessions: "6 sessions", price: "$280" },
+  { name: "ARCx15", sessions: "15 sessions", price: "$520" }
+];
 
 const galleryImages = [
   { src: "/images/ARC_26A_Launch_July_Stills-45.JPG", alt: "Group red light Pilates class at ARC", wide: true },
@@ -268,7 +274,7 @@ const steps = [
   {
     number: "02",
     title: "Visit",
-    description: "Arrive at our Melbourne clinic, relax, and enjoy your session. Most take just 10 to 20 minutes."
+    description: "Arrive at our Melbourne clinic, relax, and enjoy your session. Facility sessions (StairMaster, Vacuum Treadmill, Body Roller) run for 1 hour, and Infrared Mat Pilates classes run for 45 minutes."
   },
   {
     number: "03",
@@ -486,8 +492,8 @@ export default function Home() {
               <Image src="/assets/recovery.jpg" alt="Wellness and recovery" fill sizes="(min-width: 768px) 50vw, 100vw" />
             </div>
             <div className="session-badge">
-              <span>10</span>
-              <p>min sessions</p>
+              <span>1 hr</span>
+              <p>sessions</p>
             </div>
           </div>
         </div>
@@ -535,6 +541,11 @@ export default function Home() {
                     </div>
                   ) : null}
 
+                  <div className="placeholder-box placeholder-box--inline">
+                    <span className="placeholder-tag">Coming soon</span>
+                    <p>Machine suitability info for {machine.name}</p>
+                  </div>
+
                   <div className="machine-benefits-block">
                     <p className="machine-list-label">Benefits</p>
                     <ul className="machine-benefits">
@@ -546,6 +557,12 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="reveal placeholder-box">
+            <span className="placeholder-tag">Coming soon</span>
+            <h3>Body Roller</h3>
+            <p>Full Body Roller section coming soon.</p>
           </div>
 
           <div className="reveal infrared-panel">
@@ -620,6 +637,70 @@ export default function Home() {
 
       <div className="glow-line" />
 
+      <section id="pricing" className="content-section">
+        <div className="section-wrap">
+          <div className="section-heading">
+            <p className="reveal section-eyebrow">Pricing</p>
+            <h2 className="reveal reveal-delay-1 section-title centered">
+              Choose Your <span className="serif-italic">Session</span>
+            </h2>
+          </div>
+
+          <div className="pricing-grid">
+            <div className="reveal pricing-card">
+              <h3 className="pricing-name">ARC Reset</h3>
+              <p className="pricing-desc">A casual 1-hour session for anyone wanting to try ARC.</p>
+              <p className="pricing-note">Casual drop-in</p>
+            </div>
+
+            <div className="reveal reveal-delay-1 pricing-card">
+              <h3 className="pricing-name">Session Packs</h3>
+              <ul className="pricing-list">
+                {pricingPacks.map(pack => (
+                  <li key={pack.name}>
+                    <span>
+                      <strong>{pack.name}</strong>
+                      <em>{pack.sessions}</em>
+                    </span>
+                    <span className="pricing-price">{pack.price}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="reveal reveal-delay-2 pricing-card pricing-card--featured">
+              <h3 className="pricing-name">Weekly Membership</h3>
+              <p className="pricing-price pricing-price--big">
+                $85<small>/week</small>
+              </p>
+              <ul className="pricing-features">
+                <li>Unlimited access to the facilities</li>
+                <li>2 Pilates classes per week</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="glow-line" />
+
+      <section className="content-section">
+        <div className="section-wrap placeholder-row">
+          <div className="placeholder-box">
+            <span className="placeholder-tag">Coming soon</span>
+            <h3>Download the App</h3>
+            <p>App download link coming soon.</p>
+          </div>
+          <div className="placeholder-box">
+            <span className="placeholder-tag">Coming soon</span>
+            <h3>Find Us</h3>
+            <p>Full address coming soon.</p>
+          </div>
+        </div>
+      </section>
+
+      <div className="glow-line" />
+
       <section id="booking" className="booking-section">
         <div className="booking-glow" />
         <div className="booking-content">
@@ -654,9 +735,11 @@ export default function Home() {
               </div>
               <p>Accelerated Results Club</p>
               <span>Melbourne, Australia</span>
+              <span className="footer-placeholder">Full address coming soon</span>
             </div>
 
             <div className="social-links">
+              <span className="footer-placeholder">Social links coming soon</span>
               <a href="#" aria-label="Instagram">
                 <InstagramIcon />
               </a>
