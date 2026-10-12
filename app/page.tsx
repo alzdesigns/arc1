@@ -134,15 +134,7 @@ function InstagramIcon() {
   );
 }
 
-function CloseIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function FacebookIcon() {
+function TikTokIcon() {
   return (
     <svg
       width="18"
@@ -155,12 +147,44 @@ function FacebookIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+      <path d="M14 3v11.5a3.5 3.5 0 11-3.5-3.5" />
+      <path d="M14 3c.3 2.6 2 4.5 5 4.8" />
     </svg>
   );
 }
 
-const navItems = ["About", "Benefits", "Gallery", "How It Works", "Pricing"];
+function DownloadIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3v12M7 10l5 5 5-5M4 20h16" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+      <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+const INSTAGRAM_URL = "https://www.instagram.com/arc.clubb";
+const TIKTOK_URL = "https://www.tiktok.com/@arc.clubb";
+const APP_STORE_URL = "https://apps.apple.com/au/app/accelerated-results-club/id6787136732";
+const HERO_IMAGE = "/images/ARC_26A_Launch_July_Stills-32.JPG";
+
+const navItems = ["About", "Benefits", "Who Is ARC For", "Gallery", "How It Works", "Pricing"];
 
 const pricingPacks = [
   { name: "Intro Offer", sessions: "3 sessions", price: "$99" },
@@ -250,6 +274,26 @@ const machines: Machine[] = [
       "Relaxation"
     ]
   }
+];
+
+const audienceCards = [
+  { title: "Weight Loss & Body Goals", description: "Support your weight loss journey, target stubborn body fat and achieve your goals faster." },
+  { title: "Getting Back Into Fitness", description: "A welcoming, low-impact way to get moving again, no matter your fitness level." },
+  { title: "Gym Haters", description: "Skip the crowded gym and enjoy private, booked sessions in a comfortable environment." },
+  { title: "Busy Mums & Professionals", description: "Short on time? Get your workout in with a convenient one-hour session and get on with your day." },
+  { title: "Athletes & Recovery", description: "Support recovery, circulation and performance with dedicated recovery sessions." },
+  { title: "New Mums", description: "Gentle support to help reduce swelling and fluid build-up, while giving you time to reconnect and return to yourself." },
+  { title: "Special Events", description: "Our machines are designed to help you feel less bloated, refreshed and confident before weddings, holidays, parties, or special occasions." },
+  { title: "Wellness & Infrared", description: "Move, recharge and experience the added benefits of infrared technology as part of your wellness routine." }
+];
+
+const bodyRollCards = [
+  { title: "Active Lifestyles", description: "Recover faster, ease soreness, and keep your body moving strong." },
+  { title: "New Mums", description: "Gentle support for postpartum recovery, helping reduce swelling and fluid build-up." },
+  { title: "Special Events", description: "Look and feel your best for weddings, parties, photos, or nights out." },
+  { title: "Busy Schedules", description: "Quick reset for stress, stiffness, and that heavy feeling so you can move through your day lighter." },
+  { title: "Athletes", description: "Speed up recovery, improve circulation, and stay in top form between workouts." },
+  { title: "Everyday Wellness", description: "Recharge, de-puff, and reconnect with your body." }
 ];
 
 const infraredBenefits = [
@@ -429,7 +473,7 @@ export default function Home() {
       <section className="hero hero-gradient">
         <div className="hero-photo">
           <Image
-            src="/images/ARC_26A_Launch_July_Stills-32.JPG"
+            src={HERO_IMAGE}
             alt="ARC red light therapy studio session"
             fill
             priority
@@ -458,6 +502,9 @@ export default function Home() {
               Learn More
             </button>
           </div>
+          <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="reveal reveal-delay-4 cta-btn-outline hero-app-link">
+            <DownloadIcon /> Download the App
+          </a>
         </div>
         <div className="scroll-indicator">
           <ChevronDown />
@@ -559,10 +606,19 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="reveal placeholder-box">
-            <span className="placeholder-tag">Coming soon</span>
-            <h3>Body Roller</h3>
-            <p>Full Body Roller section coming soon.</p>
+          <div className="audience-block">
+            <p className="reveal section-eyebrow">RollShape Body Roller</p>
+            <h3 className="reveal reveal-delay-1 audience-title">
+              Who Can Use <span className="serif-italic">Body Roll?</span>
+            </h3>
+            <div className="audience-grid audience-grid--six">
+              {bodyRollCards.map((card, index) => (
+                <div key={card.title} className={`reveal reveal-delay-${(index % 3) + 1} audience-card`}>
+                  <h4>{card.title}</h4>
+                  <p>{card.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="reveal infrared-panel">
@@ -579,6 +635,28 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="glow-line" />
+
+      <section id="who-is-arc-for" className="content-section">
+        <div className="section-wrap">
+          <div className="section-heading">
+            <p className="reveal section-eyebrow">Our Members</p>
+            <h2 className="reveal reveal-delay-1 section-title centered">
+              Who Is <span className="serif-italic">ARC For?</span>
+            </h2>
+          </div>
+
+          <div className="audience-grid">
+            {audienceCards.map((card, index) => (
+              <div key={card.title} className={`reveal reveal-delay-${(index % 4) + 1} audience-card`}>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -685,16 +763,29 @@ export default function Home() {
       <div className="glow-line" />
 
       <section className="content-section">
-        <div className="section-wrap placeholder-row">
-          <div className="placeholder-box">
-            <span className="placeholder-tag">Coming soon</span>
+        <div className="section-wrap info-row">
+          <div className="reveal info-card info-card--app">
             <h3>Download the App</h3>
-            <p>App download link coming soon.</p>
+            <p>Book sessions and manage your membership on the go.</p>
+            <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="cta-btn app-button">
+              <DownloadIcon /> Download the App
+            </a>
           </div>
-          <div className="placeholder-box">
-            <span className="placeholder-tag">Coming soon</span>
+          <div id="contact" className="reveal reveal-delay-1 info-card">
             <h3>Find Us</h3>
-            <p>Full address coming soon.</p>
+            <address>
+              ARC &ndash; Accelerated Results Club
+              <br />
+              2/47 Nelson Place, Williamstown 3016
+            </address>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=2%2F47+Nelson+Place+Williamstown+3016"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="info-link"
+            >
+              Get directions
+            </a>
           </div>
         </div>
       </section>
@@ -735,17 +826,21 @@ export default function Home() {
               </div>
               <p>Accelerated Results Club</p>
               <span>Melbourne, Australia</span>
-              <span className="footer-placeholder">Full address coming soon</span>
+              <span>2/47 Nelson Place, Williamstown 3016</span>
             </div>
 
-            <div className="social-links">
-              <span className="footer-placeholder">Social links coming soon</span>
-              <a href="#" aria-label="Instagram">
-                <InstagramIcon />
+            <div className="footer-actions">
+              <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="footer-app-link">
+                <DownloadIcon /> Download the App
               </a>
-              <a href="#" aria-label="Facebook">
-                <FacebookIcon />
-              </a>
+              <div className="social-links">
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="ARC on Instagram">
+                  <InstagramIcon />
+                </a>
+                <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" aria-label="ARC on TikTok">
+                  <TikTokIcon />
+                </a>
+              </div>
             </div>
           </div>
 
