@@ -588,11 +588,6 @@ export default function Home() {
                     </div>
                   ) : null}
 
-                  <div className="placeholder-box placeholder-box--inline">
-                    <span className="placeholder-tag">Coming soon</span>
-                    <p>Machine suitability info for {machine.name}</p>
-                  </div>
-
                   <div className="machine-benefits-block">
                     <p className="machine-list-label">Benefits</p>
                     <ul className="machine-benefits">
