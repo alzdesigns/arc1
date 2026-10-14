@@ -182,7 +182,7 @@ function CloseIcon() {
 const INSTAGRAM_URL = "https://www.instagram.com/arc.clubb";
 const TIKTOK_URL = "https://www.tiktok.com/@arc.clubb";
 const APP_STORE_URL = "https://apps.apple.com/au/app/accelerated-results-club/id6787136732";
-const HERO_IMAGE = "/images/ARC_26A_Launch_July_Stills-32.JPG";
+const HERO_IMAGE = "/images/arc-reception.jpg";
 
 const navItems = ["About", "Benefits", "Who Is ARC For", "Gallery", "How It Works", "Pricing"];
 
